@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>রিমোট ইনকাম ব্লুপ্রিন্ট (মিনি প্রিভিউ এডিশন) | Army IBA Specialist (AIS)</title>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  :root {
+    --primary: #0284c7;
+    --primary-dark: #0369a1;
+    --accent: #10b981;
+    --accent-dark: #047857;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --bg-page: #040814;
+    --bg-surface: #0a1224;
+    --card-surface: #0f1c38;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #1e293b;
+    --ais-gold: #fbbf24;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.65;
+    font-size: 14.5px;
+    padding: 16px 10px 40px;
+  }
+
+  .preview-wrapper {
+    max-width: 740px;
+    margin: 0 auto;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  }
+
+  /* AIS Top Header */
+  .brand-strip {
+    background: #020611;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .brand-crest {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border: 1.5px solid var(--ais-gold);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.25);
+  }
+
+  .brand-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: 0.3px;
+  }
+
+  .brand-sub {
+    font-size: 10px;
+    color: var(--ais-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34d399;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #34d399;
+    border-radius: 50%;
+    animation: pulse 1.6s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(145deg, #050e1f 0%, #0c1e3d 60%, #06132b 100%);
+    padding: 40px 28px 30px;
+    text-align: center;
+    border-bottom: 2px solid rgba(2, 132, 199, 0.4);
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(2, 132, 199, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #f8fafc;
+    margin-bottom: 10px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: #94a3b8;
+    max-width: 580px;
+    margin: 0 auto 20px;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .stat-chip {
+    font-size: 12px;
+    color: #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Content Body */
+  .preview-content {
+    padding: 30px 24px;
+  }
+
+  /* Interactive Calculator Engine */
+  .engine-box {
+    background: var(--card-surface);
+    border: 1.5px solid var(--primary);
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.2);
+  }
+
+  .engine-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .engine-top h3 {
+    font-size: 16px;
+    color: #38bdf8;
+    font-weight: 700;
+  }
+
+  .q-block {
+    margin-bottom: 14px;
+  }
+
+  .q-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .q-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .calc-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .calc-btn:hover {
+    background: rgba(2, 132, 199, 0.2);
+    border-color: #38bdf8;
+  }
+
+  .calc-btn.selected {
+    background: var(--primary);
+    border-color: #38bdf8;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Calc Dynamic Result */
+  .calc-output {
+    background: rgba(4, 9, 20, 0.9);
+    border: 1px solid #38bdf8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+    display: none;
+    animation: fadeIn 0.25s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .output-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #38bdf8;
+  }
+
+  .output-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .m-box {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .m-label {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    display: block;
+    font-weight: 600;
+  }
+
+  .m-val {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fbbf24;
+  }
+
+  /* Teaser Script Box */
+  .preview-teaser {
+    background: #060b17;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .teaser-tag {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.35);
+    color: var(--ais-gold);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .script-preview {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .script-preview strong {
+    color: #f1f5f9;
+  }
+
+  .blur-overlay {
+    filter: blur(3.5px);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .unlock-alert {
+    background: rgba(2, 132, 199, 0.12);
+    border: 1px dashed #0284c7;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  /* Payment Gateway Box (Interactive 1-Tap Copy) */
+  .pay-box {
+    background: linear-gradient(135deg, #071226 0%, #0d2247 100%);
+    border: 2px solid var(--ais-gold);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 30px;
+    position: relative;
+  }
+
+  .pay-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .pay-badge {
+    background: var(--ais-gold);
+    color: #040914;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .pay-header h3 {
+    font-size: 18px;
+    color: #f8fafc;
+    font-weight: 800;
+  }
+
+  .pay-header p {
+    font-size: 12.5px;
+    color: #94a3b8;
+  }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .bank-full-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+  }
+
+  .method-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .method-name {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .method-num-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+  }
+
+  .method-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.5px;
+  }
+
+  .copy-btn-mini {
+    background: #0284c7;
+    border: none;
+    color: #ffffff;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    transition: background 0.2s;
+  }
+
+  .copy-btn-mini:hover {
+    background: #0369a1;
+  }
+
+  /* Next Step Actions */
+  .confirm-step {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 14px;
+  }
+
+  .confirm-step strong {
+    font-size: 12.5px;
+    color: #34d399;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .confirm-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .action-btn {
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+
+  .btn-wa {
+    background: #10b981;
+    color: #04120a;
+  }
+
+  .btn-mail {
+    background: #0284c7;
+    color: #ffffff;
+  }
+
+  .footer-sub {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 580px) {
+    .method-grid, .confirm-buttons, .q-grid {
+      grid-template-columns: 1fr;
+    }
+    .preview-content { padding: 20px 14px; }
+    .hero { padding: 30px 16px 24px; }
+    .hero h1 { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-wrapper">
+
+  <!-- AIS Top Bar -->
+  <div class="brand-strip">
+    <a href="https://www.facebook.com/share/1ZSuGprkLY/" target="_blank" class="brand-left">
+      <div class="brand-crest">AIS</div>
+      <div>
+        <span class="brand-title">Army IBA Specialist</span>
+        <span class="brand-sub">Official Digital Publication</span>
+      </div>
+    </a>
+    <div class="live-badge">
+      <div class="pulse-dot"></div>
+      লাইভ প্রিভিউ এডিশন
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="hero-tag">
+      <i data-lucide="shield-check" style="width: 12px; height: 12px;"></i>
+      নো-বুলশিট ফিল্ড ব্লুপ্রিন্ট
+    </div>
+    <h1>রিমোট ইনকাম ব্লুপ্রিন্ট (মাস্টার সংস্করণ)</h1>
+    <p>জিরো স্কিল ও সাধারণ স্মার্টফোন দিয়ে আন্তর্জাতিক ক্লায়েন্ট খুঁজে সরাসরি ডলার আয়ের স্বয়ংক্রিয় প্র্যাকটিক্যাল গাইডলাইন</p>
+
+    <div class="hero-stats">
+      <span class="stat-chip"><i data-lucide="smartphone" style="width: 12px; height: 12px; color: #38bdf8;"></i> ১০০% মোবাইল-ফার্স্ট</span>
+      <span class="stat-chip"><i data-lucide="message-square-x" style="width: 12px; height: 12px; color: #34d399;"></i> জিরো স্পোকেন ইংলিশ</span>
+      <span class="stat-chip"><i data-lucide="building" style="width: 12px; height: 12px; color: #fbbf24;"></i> ব্যাংক ও বিকাশ কমপ্লায়েন্ট</span>
+    </div>
+  </div>
+
+  <div class="preview-content">
+
+    <!-- Interactive Automated Skill & Income Filter -->
+    <div class="engine-box">
+      <div class="engine-top">
+        <i data-lucide="sliders" style="width: 18px; height: 18px; color: #38bdf8;"></i>
+        <div>
+          <h3>ইন্টারেক্টিভ স্কিল ও ইনকাম ফিল্টার (লাইভ টেস্ট)</h3>
+          <p style="font-size: 11.5px; color: #94a3b8;">নিচের ২টি অপশন সিলেক্ট করলেই আপনার জন্য সেরা পথ স্ক্রিনে ভেসে উঠবে:</p>
+        </div>
+      </div>
+
+      <!-- Question 1 -->
+      <div class="q-block">
+        <span class="q-label">১. আপনার হাতে দৈনিক কতটুকু সময় আছে?</span>
+        <div class="q-grid">
+          <button class="calc-btn" onclick="setMiniFilter('time', 'more', this)">
+            <i data-lucide="clock" style="width: 14px; height: 14px;"></i> ৩–৫ ঘণ্টা (ছাত্র / বেকার)
+          </button>
+          <button class="calc-btn" onclick="setMiniFilter('time', 'less', this)">
+            <i data-lucide="briefcase" style="width: 14px; height: 14px;"></i> ১–২ ঘণ্টা (চাকরিজীবী)
+          </button>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="q-block">
+        <span class="q-label">২. ইংরেজির বর্তমান পরিস্থিতি কী?</span>
+        <div class="q-grid">
+          <button class="calc-btn" onclick="setMiniFilter('eng', 'low', this)">
+            <i data-lucide="alert-triangle" style="width: 14px; height: 14px;"></i> দুর্বল / মুখে বলতে ভয় পাই
+          </button>
+          <button class="calc-btn" onclick="setMiniFilter('eng', 'mid', this)">
+            <i data-lucide="check" style="width: 14px; height: 14px;"></i> পড়ে বুঝতে পারি, টেক্সট সম্ভব
+          </button>
+        </div>
+      </div>
+
+      <!-- Output Trigger -->
+      <div class="calc-output" id="mini-output">
+        <div class="output
